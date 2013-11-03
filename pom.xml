@@ -16,10 +16,13 @@
 
     <modules>
         <module>kuromoji-common</module>
+        <module>kuromoji-eunjeondic</module>
+        <!--
         <module>kuromoji-ipadic</module>
         <module>kuromoji-unidic</module>
         <module>kuromoji-unidic-extended</module>
         <module>kuromoji-naist-jdic</module>
+        -->
     </modules>
 
     <developers>

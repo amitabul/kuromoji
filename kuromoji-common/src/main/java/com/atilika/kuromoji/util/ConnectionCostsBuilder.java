@@ -47,11 +47,16 @@ public class ConnectionCostsBuilder {
 
 			assert fields.length == 3;
 			
-			short forwardId = Short.parseShort(fields[0]);
-			short backwardId = Short.parseShort(fields[1]);
-			short cost = Short.parseShort(fields[2]);
+			try {
+    			short forwardId = Short.parseShort(fields[0]);
+    			short backwardId = Short.parseShort(fields[1]);
+    			short cost = Short.parseShort(fields[2]);
+    			costs.add(forwardId, backwardId, cost);
+			} catch(Exception e) {
+			    System.out.println(line);
+			}
+			    
 
-			costs.add(forwardId, backwardId, cost);
 		}
 		return costs;
 	}

@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 
 public class DictionaryBuilder {
 	
-	public enum DictionaryFormat { IPADIC, UNIDIC, UNIDIC_EXTENDED, NAIST_JDIC }
+	public enum DictionaryFormat { IPADIC, UNIDIC, UNIDIC_EXTENDED, NAIST_JDIC, EUNJEONDIC }
 		
 	public void build(DictionaryFormat format,
                       String inputDirname,
@@ -87,46 +87,53 @@ public class DictionaryBuilder {
         System.out.println("done");
     }
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-		DictionaryFormat format;
-		if (args[0].equalsIgnoreCase("ipadic")) {
-			format = DictionaryFormat.IPADIC;
-		} else if (args[0].equalsIgnoreCase("unidic")) {
-			format = DictionaryFormat.UNIDIC;
-		} else if (args[0].equalsIgnoreCase("unidic-extended")) {
+    public static void main(String[] args) throws IOException,
+            ClassNotFoundException {
+        DictionaryFormat format;
+        if (args[0].equalsIgnoreCase("ipadic")) {
+            format = DictionaryFormat.IPADIC;
+        } else if (args[0].equalsIgnoreCase("unidic")) {
+            format = DictionaryFormat.UNIDIC;
+        } else if (args[0].equalsIgnoreCase("unidic-extended")) {
             format = DictionaryFormat.UNIDIC_EXTENDED;
         } else if (args[0].equalsIgnoreCase("naist-jdic")) {
             format = DictionaryFormat.NAIST_JDIC;
+        } else if (args[0].equalsIgnoreCase("eunjeondic")) {
+            format = DictionaryFormat.EUNJEONDIC;
         } else {
-			System.err.println("Illegal format " + args[0] + " using ipadic instead");
-			format = DictionaryFormat.IPADIC;
-		}
+            System.err.println("Illegal format " + args[0]
+                    + " using ipadic instead");
+            format = DictionaryFormat.IPADIC;
+        }
 
-		String inputDirname = args[1];
-		String outputDirname = args[2];
-		String inputEncoding = args[3];
-		boolean normalizeEntries = Boolean.parseBoolean(args[4]);
-		boolean addUnnormalizedEntries = Boolean.parseBoolean(args[5]);
+        String inputDirname = args[1];
+        String outputDirname = args[2];
+        String inputEncoding = args[3];
+        boolean normalizeEntries = Boolean.parseBoolean(args[4]);
+        boolean addUnnormalizedEntries = Boolean.parseBoolean(args[5]);
         boolean compactTries = Boolean.parseBoolean(args[6]);
 
         String dictionaryFilter = "";
         if (args.length == 8) {
             dictionaryFilter = args[7];
         }
-		
-		DictionaryBuilder builder = new DictionaryBuilder();
-		System.out.println("dictionary builder");
-		System.out.println("");
-		System.out.println("dictionary format: " + format);
-		System.out.println("input directory: " + inputDirname);
-		System.out.println("output directory: " + outputDirname);
-		System.out.println("input encoding: " + inputEncoding);
-		System.out.println("normalize entries: " + normalizeEntries);
-		System.out.println("add unnormalised entries: " + addUnnormalizedEntries);
+
+        DictionaryBuilder builder = new DictionaryBuilder();
+        System.out.println("dictionary builder");
+        System.out.println("");
+        System.out.println("dictionary format: " + format);
+        System.out.println("input directory: " + inputDirname);
+        System.out.println("output directory: " + outputDirname);
+        System.out.println("input encoding: " + inputEncoding);
+        System.out.println("normalize entries: " + normalizeEntries);
+        System.out.println("add unnormalised entries: "
+                + addUnnormalizedEntries);
         System.out.println("compact tries: " + compactTries);
         System.out.println("dictionary filter: " + dictionaryFilter);
         System.out.println("");
-		builder.build(format, inputDirname, outputDirname, inputEncoding, normalizeEntries, addUnnormalizedEntries, compactTries, dictionaryFilter);
-	}
-	
+        builder.build(format, inputDirname, outputDirname, inputEncoding,
+                normalizeEntries, addUnnormalizedEntries, compactTries,
+                dictionaryFilter);
+    }
+
 }

@@ -52,6 +52,8 @@ public class TokenInfoDictionaryBuilder {
     public TokenInfoDictionaryBuilder(DictionaryFormat format, String encoding, boolean normalizeEntries, boolean addUnnormalizedEntries, String dictionaryFilter) {
         if (format == DictionaryFormat.UNIDIC) {
             this.formatter = new UnidicFormatter();
+        } else if (format == DictionaryFormat.EUNJEONDIC) {
+            this.formatter = new EunjeondicFormatter();
         } else {
             this.formatter = new IpadicFormatter();
         }
@@ -99,7 +101,7 @@ public class TokenInfoDictionaryBuilder {
 
                 String[] entry = CSVUtil.parse(line);
 
-                if (entry.length < 13) {
+                if (entry.length < 11) {
                     System.out.println("Entry in CSV is not valid: " + line);
                     continue;
                 }
